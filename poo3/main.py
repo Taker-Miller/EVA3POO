@@ -4,52 +4,62 @@ from DAO import DAO
 def registrarCurso():
     nombre = input("Ingrese nombre del curso: ")
     docente = input("Ingrese nombre del docente: ")
-   
+
     while True:
         try:
             sala = int(input("Ingrese número de la sala: "))
+            if sala < 0:
+                print("El número de la sala no puede ser negativo.")
+                continue
             break
-        except:
-            print("debes ingresar un valor numerico")
+        except ValueError:
+            print("Debes ingresar un valor numérico entero.")
 
     while True:
         try:
             valor = int(input("Ingrese el valor del curso: "))
+            if valor < 0:
+                print("El valor del curso no puede ser negativo.")
+                continue
             break
-        except:
-            print("debes ingresar un valor numerico")
- 
+        except ValueError:
+            print("Debes ingresar un valor numérico entero.")
+
     while True:
         try:
             tamanio_sala = float(input("Ingrese tamaño de la sala: "))
+            if tamanio_sala < 0:
+                print("El tamaño de la sala no puede ser negativo.")
+                continue
             break
-        except:
-            print("debes ingresar un valor numerico")
+        except ValueError:
+            print("Debes ingresar un valor numérico.")
 
     seccion = input("Ingrese la sección: ")
 
     while True:
         try:
             duracion = int(input("Ingrese duración del curso (en horas): "))
+            if duracion < 0:
+                print("La duración no puede ser negativa.")
+                continue
             break
-        except:
-            print("debes ingresar un valor numerico")
+        except ValueError:
+            print("Debes ingresar un valor numérico entero.")
 
     while True:
-        try:
-            tipo_sala = input("Ingrese tipo de sala (laboratorio/aula): ").lower()
-            if tipo_sala in ["laboratorio", "aula"]:
-                break
-        except:
-            print("el tipo de sala debe ser laboratorio o aula")
+        tipo_sala = input("Ingrese tipo de sala (laboratorio/aula): ").lower()
+        if tipo_sala in ["laboratorio", "aula"]:
+            break
+        else:
+            print("El tipo de sala debe ser laboratorio o aula.")
 
     while True:
-        try:
-            disponibilidad = input("Ingrese disponibilidad (ej: ocupado o disponible): ").lower()
-            if disponibilidad in ["ocupado", "disponible"]:
-                break
-        except:
-            print("La disponibilidad debe ser ocupado o disponible")
+        disponibilidad = input("Ingrese disponibilidad (ej: ocupado o disponible): ").lower()
+        if disponibilidad in ["ocupado", "disponible"]:
+            break
+        else:
+            print("La disponibilidad debe ser ocupado o disponible.")
 
     c = Curso(nombre, sala, valor, docente, tamanio_sala, seccion, duracion, tipo_sala, disponibilidad)
     dao = DAO()
@@ -67,30 +77,83 @@ def modificarCurso():
 
         if input("cambiar nombre? (s/n): ").lower() == 's':
             curso.set_nombre(input("Ingrese nuevo nombre: "))
-        
-        if input("¿quieres cambiar el número de sala? (s/n): ").lower() == 's':
-            curso.set_sala(int(input("Ingrese nuevo número de sala: ")))
-        
+
+        if input("¿Quieres cambiar el número de sala? (s/n): ").lower() == 's':
+            while True:
+                try:
+                    nuevo_numero = int(input("Ingrese nuevo número de sala: "))
+                    if nuevo_numero > 0:
+                        curso.set_sala(nuevo_numero)
+                        break
+                    else:
+                     print("debes ingresar un número positivo.")
+                except:
+                    print("debes ingresar un número.")
+
+
         if input("¿quieres cambiar el nombre del docente? (s/n): ").lower() == 's':
             curso.set_docente(input("Ingrese nuevo docente: "))
 
-        if input("¿cambiar el valor del curso? (s/n): ").lower() == 's':
-            curso.set_valor(int(input("Ingrese nuevo valor del curso: ")))
+        if input("¿Cambiar el valor del curso? (s/n): ").lower() == 's':
+            while True:
+                try:
+                    nuevo_valor = int(input("Ingrese nuevo valor del curso: "))
+                    if nuevo_valor > 0:
+                        curso.set_valor(nuevo_valor)
+                        break
+                    else:
+                        print("debes ingresar un número positivo.")
+                except:
+                     print("debes ingresar un número.")
 
-        if input("¿quieres cambiar el tamaño de la sala? (s/n): ").lower() == 's':
-            curso.set_tamanio_sala(float(input("Ingrese nuevo tamaño de sala: ")))
+        if input("¿Quieres cambiar el tamaño de la sala? (s/n): ").lower() == 's':
+            while True:
+                try:
+                    nuevo_tamanio = float(input("Ingrese nuevo tamaño de sala: "))
+                    if nuevo_tamanio > 0:
+                        curso.set_tamanio_sala(nuevo_tamanio)
+                        break
+                    else:
+                        print("Por favor, ingrese un número positivo.")
+                except:
+                    print("Entrada inválida. Por favor, ingrese un número.")
+
 
         if input("¿cambiar la seccion? (s/n): ").lower() == 's':
             curso.set_seccion(input("Ingrese nueva seccion: "))
 
-        if input("¿quieres cambiar la duracion del curso? (s/n): ").lower() == 's':
-            curso.set_duracion(int(input("Ingresa la nueva duracion del curso: ")))
-        
-        if input("¿deseas cambiar el tipo de sala? (s/n): ").lower() == 's':
-            curso.set_tipo_sala(input("Ingresa el nuevo tipo de sala: "))
+        if input("¿Quieres cambiar la duración del curso? (s/n): ").lower() == 's':
+            while True:
+                try:
+                    nueva_duracion = int(input("Ingresa la nueva duración del curso: "))
+                    if nueva_duracion > 0:
+                        curso.set_duracion(nueva_duracion)
+                        break
+                    else:
+                        print("Por favor, ingrese un número positivo")
+                except:
+                    print("Entrada inválida. Por favor, ingrese un número")
 
-        if input("¿quieres cambiar la disponibilidad? (s/n): ").lower() == 's':
-            curso.set_disponibilidad(input("Ingresa la disponibilidad: "))
+
+        if input("¿Deseas cambiar el tipo de sala? (s/n): ").lower() == 's':
+            while True:
+                nuevo_tipo = input("Ingresa el nuevo tipo de sala (laboratorio/aula): ").lower()
+                if nuevo_tipo in ['laboratorio', 'aula']:
+                    curso.set_tipo_sala(nuevo_tipo)
+                    break
+                else:
+                    print("debes ingresar si es laboratorio u aula")
+
+
+        if input("¿Quieres cambiar la disponibilidad? (s/n): ").lower() == 's':
+            while True:
+                nueva_disponibilidad = input("Ingresa la disponibilidad (disponible/ocupado): ").lower()
+                if nueva_disponibilidad in ['disponible', 'ocupado']:
+                    curso.set_disponibilidad(nueva_disponibilidad)
+                    break
+                else:
+                    print("debes ingresar si es disponible o ocupado")
+
 
         dao.modificarCurso(curso)
         print("Curso modificado con éxito.")
@@ -148,7 +211,7 @@ def main():
         print('5.-Cursos Del Docente')
         print('6.-Mostrar Cursos los cuales estan disponibles o no')
         print('7.-Salir')
-        
+
         opcion = input("Ingrese una opción: ")
         if opcion == '1':
             registrarCurso()
