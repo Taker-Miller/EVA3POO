@@ -5,32 +5,43 @@ def registrarCurso():
     nombre = input("Ingrese nombre del curso: ")
     docente = input("Ingrese nombre del docente: ")
 
-    while True:
+   while True:
         try:
             sala = int(input("Ingrese número de la sala: "))
-            if sala < 0:
-                print("El número de la sala no puede ser negativo.")
+            if sala >= 0:
                 break
+            print("El número de la sala no puede ser negativo.")
         except:
             print("Debes ingresar un valor numérico entero.")
 
     while True:
         try:
             valor = int(input("Ingrese el valor del curso: "))
-            if valor < 0:
-                print("El valor del curso no puede ser negativo.")
+            if valor >= 0:
                 break
+            print("El valor del curso no puede ser negativo.")
         except:
             print("Debes ingresar un valor numérico entero.")
 
     while True:
         try:
             tamanio_sala = float(input("Ingrese tamaño de la sala: "))
-            if tamanio_sala < 0:
-                print("El tamaño de la sala no puede ser negativo.")
+            if tamanio_sala >= 0:
                 break
+            print("El tamaño de la sala no puede ser negativo.")
         except:
             print("Debes ingresar un valor numérico.")
+
+    seccion = input("Ingrese la sección: ")
+
+    while True:
+        try:
+            duracion = int(input("Ingrese duración del curso (en horas): "))
+            if duracion >= 0:
+                break
+            print("La duración no puede ser negativa.")
+        except:
+            print("Debes ingresar un valor numérico entero.")
 
     seccion = input("Ingrese la sección: ")
 
